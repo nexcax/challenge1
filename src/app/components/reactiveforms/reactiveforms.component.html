@@ -1,0 +1,59 @@
+<section>
+
+	<form [formGroup]="form" (ngSubmit)="save()">
+
+		<div class="grid-container">
+			<div class="pct-300">
+				<md-card>
+					<button type="button" md-button (click)="addCategory()">Add category</button>
+					<md-tab-group formArrayName="categories">
+
+						<md-tab *ngFor="let catMain of form.controls.categories.controls;let i = index;">
+							<ng-template md-tab-label>
+								{{catMain.controls.categoryName.value}}
+							</ng-template>
+							<div [formGroupName]="i">
+								<div formArrayName="items">
+									<div *ngFor="let item of catMain.controls.items.controls;let g = index;">
+										<div [formGroupName]="g" class="padding">
+											<md-list>
+												<md-list-item>
+													<!-- form directive -->
+													<md-input-container>
+														<input mdInput placeholder="Name" formControlName="name" class="input-item">
+													</md-input-container>
+													<md-input-container>
+														<input mdInput placeholder="Description" formControlName="description" class="input-item">
+													</md-input-container>
+													<!-- form directive -->
+												</md-list-item>
+											</md-list>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="padding">
+								<button type="button" md-button color="success" (click)="addItem(catMain.controls.items)">
+									<i class="material-icons">add_circle</i> Add attribute
+								</button>
+							</div>
+						</md-tab>
+					</md-tab-group>
+					<div class="padding text-right">
+						<button type="submit" md-raised-button color="primary" [disabled]="!form.valid">Save</button>
+						<button type="button" md-raised-button color="warn">Cancel</button>
+					</div>
+				</md-card>
+			</div>
+			<div class="w-300">
+				<md-card style="overflow:auto;">
+					<pre>
+						{{form.value.categories | json}}
+					</pre>
+				</md-card>
+			</div>
+		</div>
+
+	</form>
+	
+</section>

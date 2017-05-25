@@ -1,0 +1,19 @@
+.grid-container{
+    display:flex;
+    align-items: flex-start;
+}
+
+.w-300{
+    width: 300px;
+    text-align: left;
+    padding:0px 10px;
+    box-sizing: border-box;
+}
+
+.pct-300{
+    width:calc(100% - 300px);
+}
+
+.padding{
+    padding:20px 10px 0px 10px;
+}
