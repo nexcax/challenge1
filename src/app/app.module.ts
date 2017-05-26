@@ -6,9 +6,9 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-//Angular material definition
+// Angular material definition
 import {
-  MdInputModule, 
+  MdInputModule,
   MdCheckboxModule,
   MdTabsModule,
   MdGridListModule,
@@ -17,7 +17,7 @@ import {
   MdListModule
 } from '@angular/material';
 
-//component for reactive forms
+// Component for reactive forms
 import { ReactiveformsComponent } from './components/reactiveforms/reactiveforms.component';
 
 @NgModule({
