@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ReactiveformsComponent } from './reactiveforms.component';
+import { NestedFormsComponent } from './nested-forms.component';
 
-describe('ReactiveformsComponent', () => {
-  let component: ReactiveformsComponent;
-  let fixture: ComponentFixture<ReactiveformsComponent>;
+describe('NestedFormsComponent', () => {
+  let component: NestedFormsComponent;
+  let fixture: ComponentFixture<NestedFormsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ReactiveformsComponent ]
+      declarations: [ NestedFormsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ReactiveformsComponent);
+    fixture = TestBed.createComponent(NestedFormsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

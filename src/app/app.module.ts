@@ -18,12 +18,12 @@ import {
 } from '@angular/material';
 
 // Component for reactive forms
-import { ReactiveformsComponent } from './components/reactiveforms/reactiveforms.component';
+import { NestedFormsComponent } from './components/nested-forms/nested-forms.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ReactiveformsComponent
+    NestedFormsComponent
   ],
   imports: [
     BrowserModule,

@@ -5,21 +5,17 @@ import { FormControl, FormGroup, Validators, FormArray, FormBuilder } from '@ang
 
 import {MdIconRegistry} from '@angular/material';
 
-
-
 @Component({
-  selector: 'app-reactiveforms',
-  templateUrl: './reactiveforms.component.html',
-  styleUrls: ['./reactiveforms.component.css']
+  selector: 'app-nested-forms',
+  templateUrl: './nested-forms.component.html',
+  styleUrls: ['./nested-forms.component.css']
 })
-export class ReactiveformsComponent implements OnInit {
+export class NestedFormsComponent implements OnInit {
 
   form: FormGroup;
-
-  // categories:string[]=["Device info","Sensors","Settings","Commands","Metadata"];
   categories: string[] = [ 'Device info' , 'Metadata' ];
 
-  constructor(private builder: FormBuilder) {}
+  constructor(private builder: FormBuilder) { }
 
   ngOnInit() {
     this.form = this.builder.group({
@@ -73,6 +69,5 @@ export class ReactiveformsComponent implements OnInit {
   save() {
     console.log(this.form.value);
   }
-
 
 }
