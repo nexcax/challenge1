@@ -14,26 +14,78 @@
 							</ng-template>
 							<div [formGroupName]="i">
 								<div formArrayName="items">
-									<div *ngFor="let item of catMain.controls.items.controls;let g = index;">
+									<div *ngFor="let item of catMain.controls.items.controls;let g = index;" class="list-separator">
 										<div [formGroupName]="g" class="padding">
+											<div class="text-right">
+												<a href="javascript:void(0)" (click)="item.expanded=!item.expanded">
+													<i class="material-icons" *ngIf="!item.expanded">expand_more</i>
+													<i class="material-icons" *ngIf="item.expanded">expand_less</i>
+												</a>
+											</div>
 											<md-list>
+
 												<md-list-item>
 													<!-- form directive -->
-													<md-input-container>
-														<input mdInput placeholder="Name" formControlName="name" class="input-item">
-													</md-input-container>
-													<md-input-container>
-														<input mdInput placeholder="Description" formControlName="description" class="input-item">
-													</md-input-container>
+														<md-input-container>
+															<input mdInput placeholder="Name" formControlName="name" class="input-item">
+														</md-input-container>
+														<md-input-container>
+															<input mdInput placeholder="Description" formControlName="description" class="input-item">
+														</md-input-container>
 													<!-- form directive -->
 												</md-list-item>
+
 											</md-list>
+											<div *ngIf="item.expanded==true">
+												<md-list>
+
+													<md-list-item>
+														<md-select formControlName="deviceResource" [disabled]="true" placeholder="Device Resource Type">
+															<md-option value="">Device Resource Type</md-option>
+														</md-select>
+														<md-input-container>
+															<input mdInput placeholder="Default Value" formControlName="defaultValue" class="input-item">
+														</md-input-container>
+													</md-list-item>
+
+													<md-list-item>
+														<md-select placeholder="Data Type" formControlName="dataType">
+															<md-option *ngFor="let type of dataTypes" [value]="type">
+																{{type}}
+															</md-option>
+														</md-select>
+														<md-select placeholder="Format" formControlName="format" [disabled]="formats[item.controls.dataType.value].length == 0">
+															<md-option *ngFor="let format of formats[item.controls.dataType.value]" [value]="format">
+																{{format}}
+															</md-option>
+														</md-select>
+													</md-list-item>
+
+													<div formArrayName="enumerations">
+														<button md-button type="button" (click)="addEnumeration(item.controls.enumerations);" *ngIf="item.controls.enumerations.controls.length==0">
+															<i class="material-icons">add_circle</i> Enumerations
+														</button>
+														<div *ngFor="let enumeration of item.controls.enumerations.controls; let e = index;">
+															<button md-button color="primary" type="button" (click)="addEnumeration(item.controls.enumerations);">
+																<i class="material-icons">add_circle</i>
+															</button>
+															<md-input-container>
+																<input mdInput type="text" mdInput [formControlName]="e" placeholder="Enumerations" class="input-item">
+															</md-input-container>
+															<button md-button color="warn" type="button" (click)="removeEnumeration(item.controls.enumerations,e);">
+																<i class="material-icons">delete</i>
+															</button>
+														</div>
+													</div>
+
+												</md-list>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 							<div class="padding">
-								<button type="button" md-button color="success" (click)="addItem(catMain.controls.items)">
+								<button type="button" md-raised-button color="accent" (click)="addItem(catMain.controls.items)">
 									<i class="material-icons">add_circle</i> Add attribute
 								</button>
 							</div>

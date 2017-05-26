@@ -16,3 +16,13 @@
 .input-item-2{
     width:50%;
 }
+
+.clearfix{
+    position:relative;
+    clear:both;
+    display: block;
+}
+
+.list-separator{
+    border-bottom:solid 2px #e5e5e5;
+}

@@ -14,7 +14,8 @@ import {
   MdGridListModule,
   MdCardModule,
   MdButtonModule,
-  MdListModule
+  MdListModule,
+  MdSelectModule
 } from '@angular/material';
 
 // Component for reactive forms
@@ -38,7 +39,8 @@ import { NestedFormsComponent } from './components/nested-forms/nested-forms.com
     MdGridListModule,
     MdCardModule,
     MdButtonModule,
-    MdListModule
+    MdListModule,
+    MdSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

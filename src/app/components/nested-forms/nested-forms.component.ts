@@ -1,3 +1,4 @@
+import { validate } from 'codelyzer/walkerFactory/walkerFn';
 import { Component, OnInit } from '@angular/core';
 
 import { Form } from '../../interface/form';
@@ -13,7 +14,12 @@ import {MdIconRegistry} from '@angular/material';
 export class NestedFormsComponent implements OnInit {
 
   form: FormGroup;
-  categories: string[] = [ 'Device info' , 'Metadata' ];
+  categories: string[ ] = [ 'Device info' , 'Metadata' ];
+  dataTypes: string[ ] = [ 'String', 'Object' ];
+  formats: { } = {
+    'String': [ 'None', 'Number', 'Boolean', 'Date-Time', 'CDATA', 'URI' ],
+    'Object': [ ]
+  };
 
   constructor(private builder: FormBuilder) { }
 
@@ -49,14 +55,19 @@ export class NestedFormsComponent implements OnInit {
 
   addFormItem() {
     const formTemplate = this.builder.group({
-      name: ['', Validators.required],
-      description: [''],
-      deviceResource: [''],
-      defaultValue: [''],
-      dataType: [''],
-      format: [''],
+      expanded: false,
+      name: [ '' ],
+      description: [ '' ],
+      deviceResource: [ '' ],
+      defaultValue: [ '' ],
+      dataType: ['String'],
+      format: [ '' ],
       enumerations: this.builder.array( [ ] )
     });
+    formTemplate.controls['name'].setValidators( [
+      Validators.required,
+      this.notUnique.bind( this.form )
+    ] );
     return formTemplate;
   }
 
@@ -66,8 +77,43 @@ export class NestedFormsComponent implements OnInit {
     formItems.push( formControls );
   }
 
+  addEnumeration ( enumeration: any ) {
+    const currentEnumeration = <FormArray>enumeration;
+    currentEnumeration.push( new FormControl('') );
+  }
+
+  removeEnumeration( enumeration: any, position: number ) {
+    const currentEnumeration = <FormArray>enumeration;
+    currentEnumeration.removeAt( position );
+  }
+
   save() {
     console.log(this.form.value);
+  }
+
+  // Validations definitions
+  notUnique( control: FormControl ): { [ s: string ]: boolean } {
+    const form: any = this;
+    for ( let i = 0; i < form.controls.categories.controls.length; i++ ) {
+      const items = form.controls.categories.controls[i].controls.items.value;
+      for ( let j = 0; j < items.length; j++ ) {
+        if ( items[j].name === control.value ) {
+          return {
+            not_unique: true
+          };
+        }
+      }
+    }
+    return null;
+  }
+
+  noEspacios( control: FormControl ): { [ s: string ]: boolean } {
+    if( control.value.indexOf(' ') >= 0 ) {
+      return {
+        noespacios: true
+      };
+    }
+    return null;
   }
 
 }
