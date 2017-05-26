@@ -1,3 +1,4 @@
+import { ReturnStatement } from '@angular/compiler/src/output/output_ast';
 import { validate } from 'codelyzer/walkerFactory/walkerFn';
 import { Component, OnInit } from '@angular/core';
 
@@ -61,12 +62,29 @@ export class NestedFormsComponent implements OnInit {
       deviceResource: [ '' ],
       defaultValue: [ '' ],
       dataType: ['String'],
-      format: [ '' ],
+      format: [ 'None' ],
+      rangeMin: [ 0 ],
+      rangeMax: [ 0 ],
+      measureUnit: [ '' ],
+      precision: [ 0 ],
+      accuracy: [ 0 ],
       enumerations: this.builder.array( [ ] )
     });
     formTemplate.controls['name'].setValidators( [
       Validators.required,
       this.notUnique.bind( this.form )
+    ]);
+    formTemplate.controls['rangeMin'].setValidators( [
+      this.rangeValid.bind( formTemplate )
+    ] );
+    formTemplate.controls['rangeMax'].setValidators( [
+      this.rangeValid.bind( formTemplate )
+    ] );
+    formTemplate.controls['precision'].setValidators( [
+      this.validPrecision.bind( formTemplate )
+    ] );
+    formTemplate.controls['accuracy'].setValidators( [
+      this.validAccuracy.bind( formTemplate )
     ] );
     return formTemplate;
   }
@@ -79,12 +97,20 @@ export class NestedFormsComponent implements OnInit {
 
   addEnumeration ( enumeration: any ) {
     const currentEnumeration = <FormArray>enumeration;
-    currentEnumeration.push( new FormControl('') );
+    currentEnumeration.push( new FormControl( '', [ Validators.required ] ) );
   }
 
   removeEnumeration( enumeration: any, position: number ) {
     const currentEnumeration = <FormArray>enumeration;
     currentEnumeration.removeAt( position );
+  }
+
+  refreshDataView( ) {
+    console.log( this.form.value );
+  }
+
+  viewFormStatus() {
+    console.log(this.form);
   }
 
   save() {
@@ -107,11 +133,102 @@ export class NestedFormsComponent implements OnInit {
     return null;
   }
 
-  noEspacios( control: FormControl ): { [ s: string ]: boolean } {
-    if( control.value.indexOf(' ') >= 0 ) {
-      return {
-        noespacios: true
-      };
+  validPrecision( control: FormControl ): { [ s: string ]: boolean } {
+    const item: any = this;
+    if ( item.controls['format'].value === 'Number' ) {
+      if ( item.controls.precision.value.length <= 0 ) {
+        return {
+          precision_value_required: true
+        };
+      }
+      if ( item.controls.rangeMin.value.length <= 0 ) {
+        return {
+          min_value_required_for_precision: true
+        };
+      }
+      if ( item.controls.rangeMax.value.length <= 0 ) {
+        return {
+          max_value_required_for_precision: true
+        };
+      }
+      if ( Number(item.controls.precision.value) < Number(item.controls.rangeMin.value) ||
+           Number(item.controls.precision.value) > Number(item.controls.rangeMax.value) ) {
+        return {
+          precision_range_offset: true
+        };
+      }
+      const diff = Number(item.controls.rangeMax.value) - Number(item.controls.rangeMin.value);
+      if ( ( diff % Number(item.controls.precision.value) ) !== 0 ) {
+        return {
+          no_valid_precision: true
+        };
+      }
+    }
+    return null;
+  }
+
+  rangeValid( control: FormControl ): { [ s: string ]: boolean } {
+    const item: any = this;
+    setTimeout( () => {
+      item.controls.precision.updateValueAndValidity();
+      item.controls.accuracy.updateValueAndValidity();
+    }, 20 );
+    if ( item.controls['format'].value === 'Number' ) {
+      if ( item.controls.rangeMin.value.length <= 0 ) {
+        return {
+          min_value_required: true
+        };
+      }
+      if ( item.controls.rangeMax.value.length <= 0 ) {
+        return {
+          max_value_required: true
+        };
+      }
+      if ( isNaN( Number(item.controls.rangeMin.value) ) || isNaN( Number(item.controls.rangeMax.value) ) ) {
+        return {
+          range_invalid: true
+        };
+      }
+      if ( Number(item.controls.rangeMin.value) >= Number(item.controls.rangeMax.value) ) {
+        return {
+          range_invalid: true
+        };
+      }
+    }
+    if ( item.controls.rangeMin.valid !== item.controls.rangeMax.valid ) {
+      if ( item.controls.rangeMin.valid === false ) {
+        item.controls.rangeMin.updateValueAndValidity();
+      } else if( item.controls.rangeMax.valid === false ) {
+        item.controls.rangeMax.updateValueAndValidity();
+      }
+    }
+    return null;
+  }
+
+  validAccuracy( control: FormControl ): { [ s: string ]: boolean } {
+    const item: any = this;
+    if ( item.controls['format'].value === 'Number' ) {
+      if ( item.controls.accuracy.value.length <= 0 ) {
+        return {
+          accuracy_value_required: true
+        };
+      }
+      if ( item.controls.rangeMin.value.length <= 0 ) {
+        return {
+          min_value_required_for_accuracy: true
+        };
+      }
+      if ( item.controls.rangeMax.value.length <= 0 ) {
+        return {
+          max_value_required_for_accuracy: true
+        };
+      }
+      if ( Number(item.controls.accuracy.value) < Number(item.controls.rangeMin.value) ||
+           Number(item.controls.accuracy.value) > Number(item.controls.rangeMax.value) ) {
+        return {
+          accuracy_range_offset: true
+        };
+      }
     }
     return null;
   }

@@ -1,11 +1,13 @@
 <section>
 
 	<form [formGroup]="form" (ngSubmit)="save()">
-
+		<button style="float:right;" type="button" md-button (click)="addCategory()">Add category</button>
+		<h1 class="text-center">Nested forms</h1>
+		<br clear="all">
+		<hr>
 		<div class="grid-container">
 			<div class="pct-300">
 				<md-card>
-					<button type="button" md-button (click)="addCategory()">Add category</button>
 					<md-tab-group formArrayName="categories">
 
 						<md-tab *ngFor="let catMain of form.controls.categories.controls;let i = index;">
@@ -17,10 +19,10 @@
 									<div *ngFor="let item of catMain.controls.items.controls;let g = index;" class="list-separator">
 										<div [formGroupName]="g" class="padding">
 											<div class="text-right">
-												<a href="javascript:void(0)" (click)="item.expanded=!item.expanded">
+												<button type="button" md-icon-button (click)="item.expanded=!item.expanded">
 													<i class="material-icons" *ngIf="!item.expanded">expand_more</i>
 													<i class="material-icons" *ngIf="item.expanded">expand_less</i>
-												</a>
+												</button>
 											</div>
 											<md-list>
 
@@ -44,7 +46,7 @@
 															<md-option value="">Device Resource Type</md-option>
 														</md-select>
 														<md-input-container>
-															<input mdInput placeholder="Default Value" formControlName="defaultValue" class="input-item">
+															<input mdInput placeholder="Default Value" formControlName="defaultValue" class="input-item" [readonly]="formats[item.controls.dataType.value].length == 0">
 														</md-input-container>
 													</md-list-item>
 
@@ -54,17 +56,43 @@
 																{{type}}
 															</md-option>
 														</md-select>
-														<md-select placeholder="Format" formControlName="format" [disabled]="formats[item.controls.dataType.value].length == 0">
+														<md-select placeholder="Format" formControlName="format" [disabled]="formats[item.controls.dataType.value].length === 0" (change)="refreshDataView();">
 															<md-option *ngFor="let format of formats[item.controls.dataType.value]" [value]="format">
 																{{format}}
 															</md-option>
 														</md-select>
 													</md-list-item>
 
-													<div formArrayName="enumerations">
-														<button md-button type="button" (click)="addEnumeration(item.controls.enumerations);" *ngIf="item.controls.enumerations.controls.length==0">
-															<i class="material-icons">add_circle</i> Enumerations
-														</button>
+													<md-list-item *ngIf="item.controls.format.value === 'Number' && item.controls.dataType.value === 'String'">
+														<md-input-container>
+															<input type="text" formControlName="rangeMin" mdInput placeholder="Range Min">
+														</md-input-container>
+														<md-input-container>
+															<input type="text" formControlName="rangeMax" mdInput placeholder="Range Max">
+														</md-input-container>
+													</md-list-item>
+													<md-list-item *ngIf="item.controls.format.value === 'Number' && item.controls.dataType.value === 'String'">
+														<md-input-container>
+															<input type="text" formControlName="measureUnit" mdInput placeholder="Unit of Measurement">
+														</md-input-container>
+														<md-input-container>
+															<input type="text" formControlName="precision" mdInput placeholder="Precision">
+														</md-input-container>
+														<md-input-container>
+															<input type="text" formControlName="accuracy" mdInput placeholder="Accuracy">
+														</md-input-container>
+													</md-list-item>
+
+													<div formArrayName="enumerations" *ngIf="item.controls.format.value === 'None'">
+														<div *ngIf="item.controls.enumerations.controls.length == 0">
+															<button md-button type="button" (click)="addEnumeration(item.controls.enumerations);" color="primary">
+																<i class="material-icons">add_circle</i> 
+															</button>
+															Enumerations
+														</div>
+														<div *ngIf="item.controls.enumerations.controls.length > 0">
+															<small>Enumerations ({{item.controls.enumerations.controls.length}})</small>
+														</div>
 														<div *ngFor="let enumeration of item.controls.enumerations.controls; let e = index;">
 															<button md-button color="primary" type="button" (click)="addEnumeration(item.controls.enumerations);">
 																<i class="material-icons">add_circle</i>
@@ -85,17 +113,17 @@
 								</div>
 							</div>
 							<div class="padding">
-								<button type="button" md-raised-button color="accent" (click)="addItem(catMain.controls.items)">
+								<button type="button" md-raised-button (click)="addItem(catMain.controls.items)">
 									<i class="material-icons">add_circle</i> Add attribute
 								</button>
 							</div>
 						</md-tab>
 					</md-tab-group>
-					<div class="padding text-right">
-						<button type="submit" md-raised-button color="primary" [disabled]="!form.valid">Save</button>
-						<button type="button" md-raised-button color="warn">Cancel</button>
-					</div>
 				</md-card>
+				<div class="padding text-right">
+					<button type="submit" md-raised-button color="primary" [disabled]="!form.valid">Save</button>
+					<button type="button" md-raised-button color="warn" (click)="viewFormStatus()">Cancel</button>
+				</div>
 			</div>
 			<div class="w-300">
 				<md-card style="overflow:auto;">
