@@ -2,6 +2,11 @@
 /*@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';*/
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
+html, body{
+    margin:0px;
+    padding:0px;
+}
+
 .tab-container{
     padding-top:20px;
 }
@@ -18,7 +23,12 @@
     width:100%;
 }
 .input-item-2{
-    width:50%;
+    width:calc(50% - 8px);
+    margin-left:8px;
+}
+
+.input-separator{
+    margin-left:8px;
 }
 
 .clearfix{
@@ -28,5 +38,25 @@
 }
 
 .list-separator{
-    border-bottom:solid 2px #e5e5e5;
+    border:solid 1px #e5e5e5;
 }
+
+.pull-right{
+    float:right;
+}
+
+.line-delete{
+    display:flex;
+    align-items: center;
+}
+.btn-delete{
+    width:100px;
+}
+.content-line-1{
+    width:calc(50% - 100px);
+    padding-right:6px;
+}
+.content-line-2{
+    width:50%;
+}
+

@@ -1,10 +1,10 @@
 <section>
-
+	<md-toolbar color="primary">
+		<span class="toolbar-80">Challenge 1 - Nested Forms</span>
+		<button class="toolbar-20" type="button" md-button (click)="addCategory()">Add category</button>
+	</md-toolbar>
 	<form [formGroup]="form" (ngSubmit)="save()">
-		<button style="float:right;" type="button" md-button (click)="addCategory()">Add category</button>
-		<h1 class="text-center">Nested forms</h1>
-		<br clear="all">
-		<hr>
+		
 		<div class="grid-container">
 			<div class="pct-300">
 				<md-card>
@@ -18,7 +18,7 @@
 								<div formArrayName="items">
 									<div *ngFor="let item of catMain.controls.items.controls;let g = index;" class="list-separator">
 										<div [formGroupName]="g" class="padding">
-											<div class="text-right">
+											<div class="pull-right">
 												<button type="button" md-icon-button (click)="item.expanded=!item.expanded">
 													<i class="material-icons" *ngIf="!item.expanded">expand_more</i>
 													<i class="material-icons" *ngIf="item.expanded">expand_less</i>
@@ -27,14 +27,25 @@
 											<md-list>
 
 												<md-list-item>
-													<!-- form directive -->
-														<md-input-container>
-															<input mdInput placeholder="Name" formControlName="name" class="input-item">
-														</md-input-container>
-														<md-input-container>
-															<input mdInput placeholder="Description" formControlName="description" class="input-item">
-														</md-input-container>
-													<!-- form directive -->
+													<div class="line-delete">
+														<div class="btn-delete">
+															<a md-mini-fab href="javascript:void(0)" color="warn" (click)="deleteAttribute(catMain.controls.items,g);">
+																<i class="material-icons">delete</i>
+															</a>
+														</div>
+														<div class="content-line-1">
+															<!-- form directive -->
+															<md-input-container class="input-line">
+																<input mdInput placeholder="Name" formControlName="name" class="input-item">
+															</md-input-container>
+														</div>
+														<div class="content-line-2">
+															<md-input-container class="input-item">
+																<input mdInput placeholder="Description" formControlName="description" class="input-item">
+															</md-input-container>
+															<!-- form directive -->
+														</div>
+													</div>
 												</md-list-item>
 
 											</md-list>
@@ -42,21 +53,21 @@
 												<md-list>
 
 													<md-list-item>
-														<md-select formControlName="deviceResource" [disabled]="true" placeholder="Device Resource Type">
+														<md-select formControlName="deviceResource" [disabled]="true" placeholder="Device Resource Type" class="input-item-2">
 															<md-option value="">Device Resource Type</md-option>
 														</md-select>
-														<md-input-container>
+														<md-input-container class="input-item-2">
 															<input mdInput placeholder="Default Value" formControlName="defaultValue" class="input-item" [readonly]="formats[item.controls.dataType.value].length == 0">
 														</md-input-container>
 													</md-list-item>
 
 													<md-list-item>
-														<md-select placeholder="Data Type" formControlName="dataType">
+														<md-select placeholder="Data Type" formControlName="dataType" class="input-item-2">
 															<md-option *ngFor="let type of dataTypes" [value]="type">
 																{{type}}
 															</md-option>
 														</md-select>
-														<md-select placeholder="Format" formControlName="format" [disabled]="formats[item.controls.dataType.value].length === 0" (change)="refreshDataView();">
+														<md-select placeholder="Format" formControlName="format" [disabled]="formats[item.controls.dataType.value].length === 0" (change)="refreshDataView();" class="input-item-2">
 															<md-option *ngFor="let format of formats[item.controls.dataType.value]" [value]="format">
 																{{format}}
 															</md-option>
@@ -64,21 +75,22 @@
 													</md-list-item>
 
 													<md-list-item *ngIf="item.controls.format.value === 'Number' && item.controls.dataType.value === 'String'">
-														<md-input-container>
+														<md-input-container class="input-item-2">
 															<input type="text" formControlName="rangeMin" mdInput placeholder="Range Min">
 														</md-input-container>
-														<md-input-container>
+														<md-input-container class="input-item-2">
 															<input type="text" formControlName="rangeMax" mdInput placeholder="Range Max">
 														</md-input-container>
 													</md-list-item>
+
 													<md-list-item *ngIf="item.controls.format.value === 'Number' && item.controls.dataType.value === 'String'">
-														<md-input-container>
+														<md-input-container class="input-separator">
 															<input type="text" formControlName="measureUnit" mdInput placeholder="Unit of Measurement">
 														</md-input-container>
-														<md-input-container>
+														<md-input-container class="input-separator">
 															<input type="text" formControlName="precision" mdInput placeholder="Precision">
 														</md-input-container>
-														<md-input-container>
+														<md-input-container class="input-separator">
 															<input type="text" formControlName="accuracy" mdInput placeholder="Accuracy">
 														</md-input-container>
 													</md-list-item>

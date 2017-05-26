@@ -95,6 +95,11 @@ export class NestedFormsComponent implements OnInit {
     formItems.push( formControls );
   }
 
+  deleteAttribute( attribute: any, position: number ) {
+    const currentAttribute = <FormArray>attribute;
+    currentAttribute.removeAt(position);
+  }
+
   addEnumeration ( enumeration: any ) {
     const currentEnumeration = <FormArray>enumeration;
     currentEnumeration.push( new FormControl( '', [ Validators.required ] ) );
