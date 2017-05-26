@@ -96,7 +96,7 @@
 													</md-list-item>
 
 													<div formArrayName="enumerations" *ngIf="item.controls.format.value === 'None'">
-														<div *ngIf="item.controls.enumerations.controls.length == 0">
+														<div *ngIf="item.controls.enumerations.controls.length == 0 && item.controls.dataType.value == 'String'">
 															<button md-button type="button" (click)="addEnumeration(item.controls.enumerations);" color="primary">
 																<i class="material-icons">add_circle</i> 
 															</button>
