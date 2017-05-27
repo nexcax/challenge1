@@ -26,3 +26,14 @@
     width: 20%;
     text-align: center;
 }
+
+.alert-error{
+    border:solid 1px #e5e5e5;
+    padding:3px;
+}
+
+.error{
+    border-bottom: solid 2px red;
+    position:relative;
+    border-top:solid 1px green !important;
+}

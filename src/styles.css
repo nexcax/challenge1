@@ -55,8 +55,34 @@ html, body{
 .content-line-1{
     width:calc(50% - 100px);
     padding-right:6px;
+    position: relative;
 }
 .content-line-2{
     width:50%;
 }
 
+.errors{
+    font-size:12px;
+    color:#a94442;
+    border:solid 1px #ebccd1;
+    background:#f2dede;
+    padding:6px;
+}
+
+.form-line{
+    display:flex;
+    align-items: center;
+    margin:15px 0px;
+}
+
+.form-line-1{
+    width:100%;
+}
+
+.form-line-2{
+    width:50%;
+}
+
+.form-line-3{
+    width:33%;
+}
