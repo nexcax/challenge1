@@ -51,12 +51,12 @@ export class NestedFormsComponent implements OnInit {
   addFormItem() {
     const formTemplate = this.builder.group({
       expanded: false,
-      name: [],
-      description: [],
-      deviceResource: [],
-      defaultValue: [],
-      dataType: [],
-      format: [],
+      name: [''],
+      description: [''],
+      deviceResource: [''],
+      defaultValue: [''],
+      dataType: ['String'],
+      format: ['None'],
       rangeMin: [],
       rangeMax: [],
       measureUnit: [],
