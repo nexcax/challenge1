@@ -52,26 +52,26 @@
                       <div *ngIf="item.expanded==true">
                         <div class="form-line">
                           <div class="form-line-2">
-                            <md-select formControlName="deviceResource" [disabled]="true" placeholder="Device Resource Type" class="input-item-2">
+                            <md-select formControlName="deviceResource" [disabled]="true" placeholder="Device Resource Type" class="input-item-2 form-line-1">
                               <md-option value="">Device Resource Type</md-option>
                             </md-select>
                           </div>
                           <div class="form-line-2">
-                            <md-input-container class="input-item-2">
+                            <md-input-container class="input-item-2 form-line-1">
                               <input mdInput placeholder="Default Value" formControlName="defaultValue" class="input-item" [readonly]="formats[item.controls.dataType.value]?.length == 0">
                             </md-input-container>
                           </div>
                         </div>
                         <div class="form-line">
                           <div class="form-line-2">
-                            <md-select placeholder="Data Type" formControlName="dataType" class="input-item-2">
+                            <md-select placeholder="Data Type" formControlName="dataType" class="input-item-2 form-line-1">
                               <md-option *ngFor="let type of dataTypes" [value]="type">
                                 {{type}}
                               </md-option>
                             </md-select>
                           </div>
                           <div class="form-line-2">
-                            <md-select placeholder="Format" formControlName="format" [disabled]="formats[item.controls.dataType.value]?.length === 0" (change)="refreshDataView();" class="input-item-2">
+                            <md-select placeholder="Format" formControlName="format" [disabled]="formats[item.controls.dataType.value]?.length === 0" (change)="refreshDataView();" class="input-item-2 form-line-1">
                               <md-option *ngFor="let format of formats[item.controls.dataType.value]" [value]="format">
                                 {{format}}
                               </md-option>
