@@ -90,6 +90,23 @@ export class AttributesFormComponent implements OnInit {
     this.form.reset(this.form.value);
   }
 
+  resetValues(item: any) {
+    const initValue = null;
+    if (item.format.value === 'Number') {
+      item.rangeMin.reset(0);
+      item.rangeMax.reset(0);
+      item.measureUnit.reset();
+      item.precision2.reset(0);
+      item.accuracy.reset(0);
+    } else {
+      item.rangeMin.reset();
+      item.rangeMax.reset();
+      item.measureUnit.reset();
+      item.precision2.reset();
+      item.accuracy.reset();
+    }
+  }
+
   addEnumeration(enumeration: any) {
     const currentEnumeration = <FormArray>enumeration;
     currentEnumeration.push(new FormControl(null, [Validators.required]));
