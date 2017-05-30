@@ -21,6 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 import { ValidatiorsService } from './services/validatiors.service';
+import { AttributesFormComponent } from './components/attributes-form/attributes-form.component';
 
 
 
@@ -33,7 +34,8 @@ import { ValidatiorsService } from './services/validatiors.service';
     AppComponent,
     NestedFormsComponent,
     ErrorMessagesDirective,
-    HasErrorDirective
+    HasErrorDirective,
+    AttributesFormComponent
   ],
   imports: [
     BrowserModule,
