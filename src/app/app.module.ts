@@ -1,28 +1,32 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-
 import { AppComponent } from './app.component';
-
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// Angular material definition
-import {
-  MdInputModule,
-  MdCheckboxModule,
-  MdTabsModule,
-  MdGridListModule,
-  MdCardModule,
-  MdButtonModule,
-  MdListModule,
-  MdSelectModule,
-  MdToolbarModule
-} from '@angular/material';
-
-// Component for reactive forms
 import { NestedFormsComponent } from './components/nested-forms/nested-forms.component';
 import { ErrorMessagesDirective } from './directives/error-messages.directive';
 import { HasErrorDirective } from './directives/has-error.directive';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import {
+    MdButtonModule,
+    MdCardModule,
+    MdCheckboxModule,
+    MdGridListModule,
+    MdInputModule,
+    MdListModule,
+    MdSelectModule,
+    MdTabsModule,
+    MdToolbarModule
+} from '@angular/material';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
+import { ValidatiorsService } from './services/validatiors.service';
+
+
+
+// Angular material definition
+
+// Component for reactive forms
 
 @NgModule({
   declarations: [
@@ -48,7 +52,7 @@ import { HasErrorDirective } from './directives/has-error.directive';
     MdSelectModule,
     MdToolbarModule
   ],
-  providers: [],
+  providers: [ValidatiorsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
