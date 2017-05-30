@@ -42,7 +42,6 @@ import { AttributesFormComponent } from './components/attributes-form/attributes
     FormsModule,
     HttpModule,
     ReactiveFormsModule,
-    ReactiveFormsModule,
     BrowserAnimationsModule,
     MdInputModule,
     MdCheckboxModule,
