@@ -1,0 +1,27 @@
+<form [formGroup]="form" (ngSubmit)="save()">
+  <div class="grid-container">
+    <div class="pct-300">
+      <md-card>
+        <md-tab-group formArrayName="categories">
+          <md-tab *ngFor="let catMain of form.controls.categories.controls;let i = index;">
+            <ng-template md-tab-label>
+              {{catMain.controls.categoryName.value}}
+            </ng-template>
+            <app-attributes-form [category]="catMain"></app-attributes-form>
+          </md-tab>
+        </md-tab-group>
+      </md-card>
+      <div class="padding text-right">
+        <button type="submit" md-raised-button color="primary" [disabled]="!form.valid">Save</button>
+        <button type="button" md-raised-button color="warn" (click)="viewFormStatus()">Cancel</button>
+      </div>
+    </div>
+    <div class="w-300">
+      <md-card style="overflow:auto;">
+        <pre>
+          {{form.value.categories | json}}
+        </pre>
+      </md-card>
+    </div>
+  </div>
+</form>

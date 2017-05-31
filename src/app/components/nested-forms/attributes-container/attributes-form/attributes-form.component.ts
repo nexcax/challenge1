@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ValidatiorsService } from '../../services/validatiors.service';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ValidatiorsService } from '../../../../services/validatiors.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-attributes-form',
@@ -9,8 +10,9 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 })
 export class AttributesFormComponent implements OnInit {
 
-  @Input('form') form: any;
-  @Input('categories') categories: any;
+  // @Input('form') form: any;
+  // @Input('categories') categories: string[];
+  @Input('category') category: any;
 
   dataTypes: string[] = ['String', 'Object'];
   formats: {} = {
@@ -21,25 +23,14 @@ export class AttributesFormComponent implements OnInit {
   constructor(private builder: FormBuilder, private validator: ValidatiorsService) { }
 
   ngOnInit() {
-    this.form = this.builder.group({
-      categories: this.builder.array([])
-    });
-    const categories = (<FormArray>this.form.controls['categories']);
-    for (let i = 0; i < this.categories.length; i++) {
-      const categoryGroup = this.loadForm(this.categories[i]);
-      categories.push(categoryGroup);
-    }
+    this.loadForm();
   }
 
-  loadForm(categoryName) {
-    const categoryGroup = this.builder.group({
-      categoryName: [categoryName],
-      items: this.builder.array([])
-    });
+  loadForm() {
     const formControls = this.addFormItem();
-    const formItems = (<FormArray>categoryGroup.controls.items);
+    const formItems = (<FormArray>this.category.controls.items);
     formItems.push(formControls);
-    return categoryGroup;
+    return formItems;
   }
 
   addFormItem() {
@@ -60,7 +51,7 @@ export class AttributesFormComponent implements OnInit {
     });
     formTemplate.controls['name'].setValidators([
       Validators.required,
-      this.validator.notUnique.bind(this.form)
+      this.validator.notUnique.bind(this.category)
     ]);
     formTemplate.controls['rangeMin'].setValidators([
       this.validator.rangeValid.bind(formTemplate)
@@ -75,19 +66,6 @@ export class AttributesFormComponent implements OnInit {
       this.validator.validAccuracy.bind(formTemplate)
     ]);
     return formTemplate;
-  }
-
-  addItem(category: FormArray) {
-    const formItems = (<FormArray>category);
-    const formControls = this.addFormItem();
-    formItems.push(formControls);
-    this.form.reset(this.form.value);
-  }
-
-  deleteAttribute(attribute: any, position: number) {
-    const currentAttribute = <FormArray>attribute;
-    currentAttribute.removeAt(position);
-    this.form.reset(this.form.value);
   }
 
   resetValues(item: any) {
@@ -107,6 +85,19 @@ export class AttributesFormComponent implements OnInit {
     }
   }
 
+  addItem(category: FormArray) {
+    const formItems = (<FormArray>category);
+    const formControls = this.addFormItem();
+    formItems.push(formControls);
+    this.category.reset(this.category.value);
+  }
+
+  deleteAttribute(attribute: any, position: number) {
+    const currentAttribute = <FormArray>attribute;
+    currentAttribute.removeAt(position);
+    this.category.reset(this.category.value);
+  }
+
   addEnumeration(enumeration: any) {
     const currentEnumeration = <FormArray>enumeration;
     currentEnumeration.push(new FormControl(null, [Validators.required]));
@@ -118,15 +109,7 @@ export class AttributesFormComponent implements OnInit {
   }
 
   refreshDataView() {
-    console.log(this.form.value);
-  }
-
-  viewFormStatus() {
-    console.log(this.form);
-  }
-
-  save() {
-    console.log(this.form.value);
+    console.log(this.category.value);
   }
 
 }

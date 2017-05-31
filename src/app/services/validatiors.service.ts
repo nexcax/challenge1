@@ -10,8 +10,8 @@ export class ValidatiorsService {
   notUnique(control: FormControl): { [s: string]: boolean } {
     const form: any = this;
     if (!control.pristine) {
-      for (let i = 0; i < form.controls.categories.controls.length; i++) {
-        const items = form.controls.categories.controls[i].controls.items.value;
+      // for (let i = 0; i < form.controls.categories.controls.length; i++) {
+        const items = form.controls.items.value;
         for (let j = 0; j < items.length; j++) {
           if (items[j].name === control.value) {
             return {
@@ -19,7 +19,7 @@ export class ValidatiorsService {
             };
           }
         }
-      }
+      // }
     }
     return null;
   }

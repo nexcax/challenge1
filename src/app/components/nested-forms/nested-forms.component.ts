@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ValidatiorsService } from '../../services/validatiors.service';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-nested-forms',
@@ -12,7 +11,7 @@ export class NestedFormsComponent implements OnInit {
   form: FormGroup;
   categories: string[] = ['Device info', 'Metadata'];
 
-  constructor(private validator: ValidatiorsService) { }
+  constructor() { }
 
   ngOnInit() {}
 
