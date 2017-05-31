@@ -8,8 +8,8 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 })
 export class AttributesContainerComponent implements OnInit {
 
-
   form: FormGroup;
+
   @Input('categories') categories: string[];
 
   constructor(private builder: FormBuilder) { }

@@ -1,6 +1,6 @@
-import { ValidatiorsService } from '../../../../services/validatiors.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { ValidatiorsService } from '../../../../services/validatiors.service';
 
 
 @Component({
@@ -10,8 +10,6 @@ import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms'
 })
 export class AttributesFormComponent implements OnInit {
 
-  // @Input('form') form: any;
-  // @Input('categories') categories: string[];
   @Input('category') category: any;
 
   dataTypes: string[] = ['String', 'Object'];
