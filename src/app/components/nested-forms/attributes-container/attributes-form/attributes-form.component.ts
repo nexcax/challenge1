@@ -107,7 +107,7 @@ export class AttributesFormComponent implements OnInit {
   }
 
   refreshDataView() {
-    console.log(this.category.value);
+    return;
   }
 
 }

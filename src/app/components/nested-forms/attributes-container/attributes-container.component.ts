@@ -3,8 +3,7 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-attributes-container',
-  templateUrl: './attributes-container.component.html',
-  styles: []
+  templateUrl: './attributes-container.component.html'
 })
 export class AttributesContainerComponent implements OnInit {
 
@@ -34,11 +33,11 @@ export class AttributesContainerComponent implements OnInit {
   }
 
   save() {
-    console.log(this.form.value);
+    return;
   }
 
   viewFormStatus() {
-    console.log(this.form);
+    return;
   }
 
 }

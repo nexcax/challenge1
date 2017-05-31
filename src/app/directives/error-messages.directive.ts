@@ -41,7 +41,7 @@ export class ErrorMessagesDirective implements AfterViewInit {
       if (this.errors.accuracy_range_offset) {
         htmlError += `<div>${ this.control } is out of range</div>`;
       }
-      if (this.errors.precision2_not_valid) {
+      if (this.errors.precision2_not_valid || this.errors.accuracy_not_valid) {
         htmlError += `<div>${ this.control } is not a valid value</div>`;
       }
       this.elementRef.nativeElement.insertAdjacentHTML('afterbegin', htmlError);

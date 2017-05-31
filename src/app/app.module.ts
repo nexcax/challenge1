@@ -22,14 +22,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AttributesContainerComponent } from './components/nested-forms/attributes-container/attributes-container.component';
 
-
-
-
-
-// Angular material definition
-
-// Component for reactive forms
-
 @NgModule({
   declarations: [
     AppComponent,

@@ -10,7 +10,6 @@ export class ValidatiorsService {
   notUnique(control: FormControl): { [s: string]: boolean } {
     const form: any = this;
     if (!control.pristine) {
-      // for (let i = 0; i < form.controls.categories.controls.length; i++) {
         const items = form.controls.items.value;
         for (let j = 0; j < items.length; j++) {
           if (items[j].name === control.value) {
@@ -19,7 +18,6 @@ export class ValidatiorsService {
             };
           }
         }
-      // }
     }
     return null;
   }
@@ -118,6 +116,12 @@ export class ValidatiorsService {
         Number(item.controls.accuracy.value) > Number(item.controls.rangeMax.value)) {
         return {
           accuracy_range_offset: true
+        };
+      }
+      const diff = Number(item.controls.rangeMax.value) - Number(item.controls.rangeMin.value);
+      if ((diff % Number(item.controls.accuracy.value)) !== 0) {
+        return {
+          accuracy_not_valid: true
         };
       }
     }
