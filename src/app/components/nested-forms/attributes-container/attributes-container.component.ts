@@ -33,11 +33,7 @@ export class AttributesContainerComponent implements OnInit {
   }
 
   save() {
-    return;
-  }
-
-  viewFormStatus() {
-    return;
+    this.form.reset(this.form.value);
   }
 
 }

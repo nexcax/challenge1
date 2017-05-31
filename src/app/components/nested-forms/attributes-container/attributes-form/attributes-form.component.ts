@@ -106,8 +106,4 @@ export class AttributesFormComponent implements OnInit {
     currentEnumeration.removeAt(position);
   }
 
-  refreshDataView() {
-    return;
-  }
-
 }

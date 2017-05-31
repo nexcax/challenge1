@@ -1,7 +1,7 @@
 <div class="padding">
   <form [formGroup]="form" (ngSubmit)="save()">
     <div class="grid-container">
-      <div class="pct-300">
+      <div class="col-left">
         <md-card>
           <md-tab-group formArrayName="categories">
             <md-tab *ngFor="let catMain of form.controls.categories.controls;let i = index;">
@@ -16,10 +16,10 @@
         </md-card>
         <div class="padding text-right">
           <button type="submit" md-raised-button color="primary" [disabled]="!form.valid">Save</button>
-          <button type="button" md-raised-button color="warn" (click)="viewFormStatus()">Cancel</button>
+          <button type="button" md-raised-button color="warn">Cancel</button>
         </div>
       </div>
-      <div class="w-300">
+      <div class="col-right">
         <md-card style="overflow:auto;">
           <pre>
             {{form.value.categories | json}}

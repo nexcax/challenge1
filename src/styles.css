@@ -96,17 +96,16 @@ html, body{
     align-items:  flex-start;
 }
 
-.w-300{
+.col-right{
     width:  400px;
     text-align:  left;
     padding: 0px 10px;
     box-sizing:  border-box;
 }
 
-.pct-300{
+.col-left{
     width: calc(100% - 400px);
 }
-
 
 .toolbar-80{
     width: 80%;
