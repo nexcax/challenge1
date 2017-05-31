@@ -1,7 +1,9 @@
 import { AppComponent } from './app.component';
+import { AttributesFormComponent } from './components/nested-forms/attributes-container/attributes-form/attributes-form.component';
 import { NestedFormsComponent } from './components/nested-forms/nested-forms.component';
 import { ErrorMessagesDirective } from './directives/error-messages.directive';
 import { HasErrorDirective } from './directives/has-error.directive';
+import { ValidatiorsService } from './services/validatiors.service';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -18,9 +20,9 @@ import {
 } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AttributesContainerComponent } from './components/nested-forms/attributes-container/attributes-container.component';
 
 
-import { ValidatiorsService } from './services/validatiors.service';
 
 
 
@@ -33,13 +35,14 @@ import { ValidatiorsService } from './services/validatiors.service';
     AppComponent,
     NestedFormsComponent,
     ErrorMessagesDirective,
-    HasErrorDirective
+    HasErrorDirective,
+    AttributesFormComponent,
+    AttributesContainerComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    ReactiveFormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MdInputModule,
