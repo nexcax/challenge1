@@ -13,6 +13,9 @@ export class AttributesContainerComponent implements OnInit {
 
   constructor(private builder: FormBuilder) { }
 
+  /**
+   * Start the component with Input of Categories
+   */
   ngOnInit() {
     this.form = this.builder.group({
       categories: this.builder.array([])
@@ -24,6 +27,10 @@ export class AttributesContainerComponent implements OnInit {
     }
   }
 
+  /**
+   * Start the controls in a category inside a form
+   * @param categoryName 
+   */
   loadForm(categoryName) {
     const categoryGroup = this.builder.group({
       categoryName: [categoryName],
@@ -32,6 +39,9 @@ export class AttributesContainerComponent implements OnInit {
     return categoryGroup;
   }
 
+  /**
+   * Reffer to final process for related submit event in form
+   */
   save() {
     this.form.reset(this.form.value);
   }

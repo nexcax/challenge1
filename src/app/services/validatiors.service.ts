@@ -6,7 +6,10 @@ export class ValidatiorsService {
 
   constructor() { }
 
-  // Validations definitions
+  /**
+   * Valid as unique name in list of attributes in form
+   * @param control: FormControl ()
+   */
   notUnique(control: FormControl): { [s: string]: boolean } {
     const form: any = this;
     if (!control.pristine) {
@@ -22,6 +25,10 @@ export class ValidatiorsService {
     return null;
   }
 
+  /**
+   * Valid the precision calculation using formula (Range Max - Range Min) % Precision === 0
+   * @param control: FormControl
+   */
   validPrecision2(control: FormControl): { [s: string]: boolean } {
     const item: any = this;
     if (item.controls['format'].value === 'Number') {
@@ -56,6 +63,10 @@ export class ValidatiorsService {
     return null;
   }
 
+  /**
+   * Valid a range between Range Min and Range Max values
+   * @param control: FormControl
+   */
   rangeValid(control: FormControl): { [s: string]: boolean } {
     const item: any = this;
     setTimeout(() => {
@@ -94,6 +105,10 @@ export class ValidatiorsService {
     return null;
   }
 
+  /**
+   * Valid the accuracy calculation using formula (Range Max - Range Min) % Accuracy === 0
+   * @param control: FormControl
+   */
   validAccuracy(control: FormControl): { [s: string]: boolean } {
     const item: any = this;
     if (item.controls['format'].value === 'Number') {

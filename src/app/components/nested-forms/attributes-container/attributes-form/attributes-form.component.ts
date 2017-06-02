@@ -24,6 +24,9 @@ export class AttributesFormComponent implements OnInit {
     this.loadForm();
   }
 
+  /**
+   * Start controls to be used in attributtes of form
+   */
   loadForm() {
     const formControls = this.addFormItem();
     const formItems = (<FormArray>this.category.controls.items);
@@ -31,6 +34,9 @@ export class AttributesFormComponent implements OnInit {
     return formItems;
   }
 
+  /**
+   * Add block of controls in attributte nested form
+   */
   addFormItem() {
     const formTemplate = this.builder.group({
       expanded: false,
@@ -66,6 +72,10 @@ export class AttributesFormComponent implements OnInit {
     return formTemplate;
   }
 
+  /**
+   * Reset all values to default value when Format control value change
+   * @param item
+   */
   resetValues(item: any) {
     const initValue = null;
     if (item.format.value === 'Number') {
@@ -83,6 +93,10 @@ export class AttributesFormComponent implements OnInit {
     }
   }
 
+  /**
+   * Add new dinamyc item in attributes nested form
+   * @param category
+   */
   addItem(category: FormArray) {
     const formItems = (<FormArray>category);
     const formControls = this.addFormItem();
@@ -90,17 +104,31 @@ export class AttributesFormComponent implements OnInit {
     this.category.reset(this.category.value);
   }
 
+  /**
+   * Delete attribute from selected category
+   * @param attribute
+   * @param position
+   */
   deleteAttribute(attribute: any, position: number) {
     const currentAttribute = <FormArray>attribute;
     currentAttribute.removeAt(position);
     this.category.reset(this.category.value);
   }
 
+  /**
+   * Add enumeration item control for list of enumerations
+   * @param enumeration
+   */
   addEnumeration(enumeration: any) {
     const currentEnumeration = <FormArray>enumeration;
     currentEnumeration.push(new FormControl(null, [Validators.required]));
   }
 
+  /**
+   * Remove enumeration for a selected position in list
+   * @param enumeration
+   * @param position
+   */
   removeEnumeration(enumeration: any, position: number) {
     const currentEnumeration = <FormArray>enumeration;
     currentEnumeration.removeAt(position);

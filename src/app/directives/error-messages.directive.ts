@@ -11,6 +11,9 @@ export class ErrorMessagesDirective implements AfterViewInit {
 
   constructor(private elementRef: ElementRef) {}
 
+  /**
+   * After init state control, for start validations messages views
+   */
   ngAfterViewInit() {
     let htmlError = '';
     if (this.invalid) {

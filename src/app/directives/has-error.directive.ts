@@ -9,6 +9,9 @@ export class HasErrorDirective {
 
   constructor(private elementRef: ElementRef) {}
 
+  /**
+   * Check if the element Input related, has an error after validations
+   */
   checkIfHasError() {
     if (this.error) {
       this.elementRef.nativeElement.class = 'error';
@@ -17,6 +20,7 @@ export class HasErrorDirective {
     }
   }
 
+  // #Listener definition for Focus and Blur events
   @HostListener('focus') checkErrorOnFocus() {
     this.checkIfHasError();
   }
