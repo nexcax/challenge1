@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-nested-forms',
@@ -7,7 +6,6 @@ import { FormGroup } from '@angular/forms';
 })
 export class NestedFormsComponent {
 
-  form: FormGroup;
   categories: string[] = ['Device info', 'Metadata'];
 
   constructor() { }

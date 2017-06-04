@@ -100,22 +100,21 @@
             </div>
             </div>
           <div>
+            <div *ngIf="item.controls.dataType.value == 'String' && item.controls.format.value === 'None'">
+              <md-input-container>
+                <input mdInput type="text" formControlName="newEnumeration" placeholder="New enumeration" class="input-item">
+              </md-input-container>
+              <button md-button type="button" (click)="addEnumeration(item.controls.enumerations,item.controls.newEnumeration);" color="primary">
+                <i class="material-icons">add_circle</i>{{newEnumeration}}
+              </button>
+            </div>
             <div formArrayName="enumerations" *ngIf="item.controls.format.value === 'None'">
-              <div *ngIf="item.controls.enumerations.controls.length == 0 && item.controls.dataType.value == 'String'">
-                <button md-button type="button" (click)="addEnumeration(item.controls.enumerations);" color="primary">
-                  <i class="material-icons">add_circle</i> 
-                </button>
-                Enumerations
-              </div>
-              <div *ngIf="item.controls.enumerations.controls.length > 0">
+              <div>
                 <small>Enumerations ({{item.controls.enumerations.controls.length}})</small>
               </div>
               <div *ngFor="let enumeration of item.controls.enumerations.controls; let e = index;">
-                <button md-button color="primary" type="button" (click)="addEnumeration(item.controls.enumerations);">
-                  <i class="material-icons">add_circle</i>
-                </button>
                 <md-input-container>
-                  <input mdInput type="text" mdInput [formControlName]="e" placeholder="Enumerations" class="input-item">
+                  <input mdInput type="text" [formControlName]="e" placeholder="Enumerations" class="input-item">
                 </md-input-container>
                 <button md-button color="warn" type="button" (click)="removeEnumeration(item.controls.enumerations,e);">
                   <i class="material-icons">delete</i>

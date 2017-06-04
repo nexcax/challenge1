@@ -51,6 +51,7 @@ export class AttributesFormComponent implements OnInit {
       measureUnit: [],
       precision2: [],
       accuracy: [],
+      newEnumeration: [''],
       enumerations: this.builder.array([])
     });
     formTemplate.controls['name'].setValidators([
@@ -84,12 +85,16 @@ export class AttributesFormComponent implements OnInit {
       item.measureUnit.reset();
       item.precision2.reset(0);
       item.accuracy.reset(0);
+      item.newEnumeration.reset('');
+      item.enumerations.reset([]);
     } else {
       item.rangeMin.reset();
       item.rangeMax.reset();
       item.measureUnit.reset();
       item.precision2.reset();
       item.accuracy.reset();
+      item.newEnumeration.reset('');
+      item.enumerations.reset([]);
     }
   }
 
@@ -119,9 +124,13 @@ export class AttributesFormComponent implements OnInit {
    * Add enumeration item control for list of enumerations
    * @param enumeration
    */
-  addEnumeration(enumeration: any) {
+  addEnumeration(enumeration: any, enumerationText: any) {
+    if (enumerationText.value.length === 0) {
+      return;
+    }
     const currentEnumeration = <FormArray>enumeration;
-    currentEnumeration.push(new FormControl(null, [Validators.required]));
+    currentEnumeration.push(new FormControl(enumerationText.value, [Validators.required]));
+    enumerationText.setValue('');
   }
 
   /**

@@ -3,88 +3,88 @@
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
 html, body{
-    margin:0px;
-    padding:0px;
+    margin: 0;
+    padding: 0;
 }
 
 .tab-container{
-    padding-top:20px;
+    padding-top: 20px;
 }
 
 .text-right{
-    text-align:right;
+    text-align: right;
 }
 
 .text-center{
-    text-align:center;
+    text-align: center;
 }
 
 .input-item{
-    width:100%;
+    width: 100%;
 }
 .input-item-2{
-    width:calc(50% - 8px);
-    margin-left:8px;
+    width: calc(50% - 8px);
+    margin-left: 8px;
 }
 
 .input-separator{
-    margin-left:8px;
+    margin-left: 8px;
 }
 
 .clearfix{
-    position:relative;
-    clear:both;
+    position: relative;
+    clear: both;
     display: block;
 }
 
 .list-separator{
-    border:solid 1px #e5e5e5;
+    border: solid 1px #e5e5e5;
 }
 
 .pull-right{
-    float:right;
+    float: right;
 }
 
 .line-delete{
-    display:flex;
+    display: flex;
     align-items: center;
 }
 .btn-delete{
-    width:100px;
+    width: 100px;
 }
 .content-line-1{
-    width:calc(50% - 100px);
-    padding-right:6px;
+    width: calc(50% - 100px);
+    padding-right: 6px;
     position: relative;
 }
 .content-line-2{
-    width:50%;
+    width: 50%;
 }
 
 .errors{
-    font-size:12px;
-    color:#a94442;
-    border:solid 1px #ebccd1;
-    background:#f2dede;
-    padding:6px;
+    font-size: 12px;
+    color: #a94442;
+    border: solid 1px #ebccd1;
+    background: #f2dede;
+    padding: 6px;
 }
 
 .form-line{
-    display:flex;
+    display: flex;
     align-items: center;
-    margin:15px 0px;
+    margin: 15px 0;
 }
 
 .form-line-1{
-    width:100%;
+    width: 100%;
 }
 
 .form-line-2{
-    width:50%;
+    width: 50%;
 }
 
 .form-line-3{
-    width:33%;
+    width: 33%;
 }
 
 .padding{
