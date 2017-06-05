@@ -1,7 +1,6 @@
+import { ValidatiorsService } from '../../../../services/validatiors.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { ValidatiorsService } from '../../../../services/validatiors.service';
-
 
 @Component({
   selector: 'app-attributes-form',
@@ -86,7 +85,9 @@ export class AttributesFormComponent implements OnInit {
       item.precision2.reset(0);
       item.accuracy.reset(0);
       item.newEnumeration.reset('');
-      item.enumerations.reset([]);
+      while ((<FormArray>item.enumerations).length) {
+        (<FormArray>item.enumerations).removeAt(0);
+      }
     } else {
       item.rangeMin.reset();
       item.rangeMax.reset();
